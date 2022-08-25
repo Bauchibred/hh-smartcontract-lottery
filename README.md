@@ -338,4 +338,4 @@ THIS IS WHEN WE SIMULATE running a transaction instead of calling it in essence
     hh test --network rinkeby
     the first tx is entering the raffle and we do see that after a while we can see it in our tx history on etherscan
     after the tests run we cant find our performupkeep function and check upkeep on etherscan until we check the internal txns section and then we can see them and this is cause these txs are called by our vrf internally
-    hh test only runs our unit test
+    hh test only runs our unit test# hh-smartcontract-lottery
