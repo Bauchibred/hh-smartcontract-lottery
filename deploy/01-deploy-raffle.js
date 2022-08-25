@@ -16,13 +16,13 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 
     if (chainId == 31337) {
         // create VRFV2 Subscription
-        const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
+        const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock") //this means that if we are on a dev chain we use ethers to get our vrf
         vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address
-        const transactionResponse = await vrfCoordinatorV2Mock.createSubscription()
+        const transactionResponse = await vrfCoordinatorV2Mock.createSubscription() //this is used for instead of using the UI to get our subscription asd then below we run the funding by first getting it from
         const transactionReceipt = await transactionResponse.wait()
         subscriptionId = transactionReceipt.events[0].args.subId
         // Fund the subscription
-        // Our mock makes it so we don't actually have to worry about sending fund
+        // Our mock makes it so we don't actually have to worry about sending fund but usually we need the link token on a real network
         await vrfCoordinatorV2Mock.fundSubscription(subscriptionId, FUND_AMOUNT)
     } else {
         vrfCoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2"]

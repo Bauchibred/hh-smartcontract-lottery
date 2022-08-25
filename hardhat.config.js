@@ -100,6 +100,7 @@ module.exports = {
             1: 0, // similarly on mainnet it will take the first account as deployer. Note though that depending on how hardhat network are configured, the account 0 on one network can be different than on another
         },
         player: {
+            //used to seperate different users who are operating with our contracts
             default: 1,
         },
     },

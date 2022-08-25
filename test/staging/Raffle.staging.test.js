@@ -2,7 +2,7 @@ const { assert, expect } = require("chai")
 const { getNamedAccounts, deployments, ethers, network } = require("hardhat")
 const { developmentChains, networkConfig } = require("../../helper-hardhat-config")
 
-developmentChains.includes(network.name)
+developmentChains.includes(network.name) //i.e if the chain we are on is a development chain i.e not a localhost we run this test
     ? describe.skip
     : describe("Raffle Staging Tests", function () {
           let raffle, raffleEntranceFee, deployer
@@ -33,7 +33,7 @@ developmentChains.includes(network.name)
                               const winnerEndingBalance = await accounts[0].getBalance()
                               const endingTimeStamp = await raffle.getLastTimeStamp()
 
-                              await expect(raffle.getPlayer(0)).to.be.reverted
+                              await expect(raffle.getPlayer(0)).to.be.reverted //THIS IS USED TO SEE IF OUR PLAYERS ARRAY HAS BEEN RESET AND THE IDEA IS IF THERE IS NO PERSON AT POSITION ZERO THAT MEANS THERE IS NO PERSON and the array is empty
                               assert.equal(recentWinner.toString(), accounts[0].address)
                               assert.equal(raffleState, 0)
                               assert.equal(
