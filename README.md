@@ -1,29 +1,4 @@
-# Hardhat Smartcontract Lottery (Raffle) FCC
-
-This is a section of the Javascript Blockchain/Smart Contract FreeCodeCamp Course.
-
-*[⌨️ (13:41:02) Lesson 9: Hardhat Smart Contract Lottery](https://www.youtube.com/watch?v=gyMwXuJrbJQ&t=49262s)*
-
-[Full Repo](https://github.com/smartcontractkit/full-blockchain-solidity-course-js)
-
-- [Hardhat Smartcontract Lottery (Raffle) FCC](#hardhat-smartcontract-lottery-raffle-fcc)
-- [Getting Started](#getting-started)
-  - [Requirements](#requirements)
-  - [Quickstart](#quickstart)
-  - [Typescript](#typescript)
-- [Usage](#usage)
-  - [Testing](#testing)
-    - [Test Coverage](#test-coverage)
-- [Deployment to a testnet or mainnet](#deployment-to-a-testnet-or-mainnet)
-    - [Estimate gas cost in USD](#estimate-gas-cost-in-usd)
-  - [Verify on etherscan](#verify-on-etherscan)
-    - [Typescript differences](#typescript-differences)
-- [Linting](#linting)
-- [Thank you!](#thank-you)
-
-This project is apart of the Hardhat FreeCodeCamp video.
-
-Checkout the full blockchain course video [here.](https://www.youtube.com/watch?v=gyMwXuJrbJQ)
+# Hardhat Smartcontract Lottery (Raffle) 
 
 # Getting Started
 
@@ -42,18 +17,9 @@ Checkout the full blockchain course video [here.](https://www.youtube.com/watch?
 ## Quickstart
 
 ```
-git clone https://github.com/PatrickAlphaC/hardhat-smartcontract-lottery-fcc
-cd hardhat-smartcontract-lottery-fcc
+git clone https://github.com/Bauchibred/hh-smartcontract-lottery
+cd hh-smartcontract-lottery
 yarn
-```
-
-## Typescript
-
-If you want to get to typescript and you cloned the javascript version, just run:
-
-```
-git checkout typescript
-yarn 
 ```
 
 # Usage
@@ -152,16 +118,6 @@ However, you can manual verify with:
 yarn hardhat verify --constructor-args arguments.js DEPLOYED_CONTRACT_ADDRESS
 ```
 
-### Typescript differences
-1. `.js` files are now `.ts`
-2. We added a bunch of typescript and typing packages to our `package.json`. They can be installed with:
-   1. `yarn add @typechain/ethers-v5 @typechain/hardhat @types/chai @types/node ts-node typechain typescript`
-3. The biggest one being [typechain](https://github.com/dethcrypto/TypeChain)
-   1. This gives your contracts static typing, meaning you'll always know exactly what functions a contract can call. 
-   2. This gives us `factories` that are specific to the contracts they are factories of. See the tests folder for a version of how this is implemented. 
-4. We use `imports` instead of `require`. Confusing to you? [Watch this video](https://www.youtube.com/watch?v=mK54Cn4ceac)
-5. Add `tsconfig.json`
-
 # Linting
 
 To check linting / code formatting:
@@ -173,19 +129,12 @@ or, to fix:
 yarn lint:fix
 ```
 
-# Thank you!
-
-If you appreciated this, feel free to follow me or donate!
-
-ETH/Polygon/Avalanche/etc Address: 0x9680201d9c93d65a3603d2088d125e955c73BD65
-
-[![Patrick Collins Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/PatrickAlphaC)
-[![Patrick Collins YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/channel/UCn-3f8tw_E1jZvhuHatROwA)
-[![Patrick Collins Linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/patrickalphac/)
-[![Patrick Collins Medium](https://img.shields.io/badge/Medium-000000?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@patrick.collins_58673/)
 
 
-this is a decentralized lottery that fixes the macdonalds issue
+# More detailed explanation on code
+
+
+This is a decentralized lottery that fixes the macdonalds issue
 we are going to be using chainlinnk vrf to get a random number, then we pick a winner
 
 
@@ -303,7 +252,7 @@ Callstatic
 THIS IS WHEN WE SIMULATE running a transaction instead of calling it in essence
     const { upkeepNeeded } = await raffle.callStatic.checkUpkeep("0x") // upkeepNeeded = (timePassed && isOpen && hasBalance && hasPlayers)
 
-    A string of "0x" is going to be translated by hardhat into an empty  byte object which is same as ([])
+   A string of "0x" is going to be translated by hardhat into an empty  byte object which is same as ([])
 
     All our describe block are normal functions but for our its remember they have to be async functions as there is going to be need for us to use await
 
@@ -317,7 +266,7 @@ THIS IS WHEN WE SIMULATE running a transaction instead of calling it in essence
     ?  ( )  :  ( )   -  THIS MEANS IF CONDITION IS TRUE DO SOMETHING : IF NOT DO ANOTHER THING
 
 
-    Testing on a test net 
+  Testing on a test net 
     to do this we need to 
     1. get our subid for the vrf
     2. Deploy the contracts using the subid
@@ -325,12 +274,12 @@ THIS IS WHEN WE SIMULATE running a transaction instead of calling it in essence
     4. Register the cotracts with chainlink keepers
     5. we now run the staging tests
 
-    we go to the faucets link and we get eth and link tokens 
+  we go to the faucets link and we get eth and link tokens 
     After creating the subscription we can now take the subid and add it to the subid in our helperhardhat conifg
     then we add funds into the account so we can pay the oracle gas to get our random numbers
     dont forget about adding everything we need in our .env file
 
-    so after deploying to a test net we should see everything regarding our code with the functions and maybe it's already verified after which we then can check the raffle state already and see that its still open
+  so after deploying to a test net we should see everything regarding our code with the functions and maybe it's already verified after which we then can check the raffle state already and see that its still open
     then we add the consumer address on our chainlink vrf and the address we add is going to be thecontract address to which our contract was deployed
     After everything has gone through
     and when you go back and chek we can see our upkeeps and see what the balance is and what not
@@ -339,3 +288,5 @@ THIS IS WHEN WE SIMULATE running a transaction instead of calling it in essence
     the first tx is entering the raffle and we do see that after a while we can see it in our tx history on etherscan
     after the tests run we cant find our performupkeep function and check upkeep on etherscan until we check the internal txns section and then we can see them and this is cause these txs are called by our vrf internally
     hh test only runs our unit test# hh-smartcontract-lottery
+    
+# Thank you!
